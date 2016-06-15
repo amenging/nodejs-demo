@@ -1,0 +1,13 @@
+{
+  "type":"data",
+  "all":[
+    {
+      "name":"tom",
+      "password":"ed"
+    },
+    {
+      "name":"tonny",
+      "password":"ed1"
+    }
+  ]
+}
