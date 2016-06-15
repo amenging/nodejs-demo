@@ -11,16 +11,36 @@ var Vac = require('./model');
 // });
 //console.log(Vac);
 // db.Vac.insert({"name":"user3","password":123456});
+var csstest = "<style>#testactive{background:#333}</style>";
+var csstest1 = "<style>#testactive1{background:#333}</style>";
+var csstest2 = "<style>#testactive2{background:#333}</style>";
+var css1 = "<style>.my-drop{diplay:none}</style>";
+function checkLog(req,res,next){
+	if(!req.session.name){
+		req.session.error = "请先登录！";
+		res.redirect('/login');
+	}
+	next();
+}
+function checkNotLog(req,res,next){
+	if(!req.session.name){
+		res.redirect('back');
+	}
+	next();
+}
 router.get('/', function (req, res, next) {
     Vac.find(function (err, data) {
     	res.render('index', {
-            vacs: data
+            vacs: data,
+            css: csstest
         });
     });   
 });
-
+//login
 router.get('/login', function(req, res, next) {
-  res.render('login');
+  res.render('login',{
+  	css:csstest1
+  });
 });
 router.post('/login',function(req, res, next){
 	var name,password;
@@ -43,9 +63,12 @@ router.post('/login',function(req, res, next){
 		}
 	});
 })
-
+//register
 router.get('/reg', function(req, res, next) {
-  res.render('reg');
+  res.render('reg',{
+  	css:csstest2,
+  	name:req.session.name
+  });
 });
 router.post('/reg',function(req, res, next){
 	var name, password, repass;
@@ -66,35 +89,71 @@ router.post('/reg',function(req, res, next){
 		    if(error){
 	        console.log(error);
 		    }else{
-		    	// var n = Vac.find({name:name});
-		    	// console.log(n);
 	        console.log('save ok');
 	        res.redirect("/");
 		    }
 		  });
 		}
 	});
-	// if(password != repass) {
-	// 	res.render("reg",{ title: '注册' });
-	// }else{
-	// 	var doc = {name : req.body.name, password: req.body.password};
-	// 	Vac.create(doc, function(error){
-	//     if(error){
- //        console.log(error);
-	//     }else{
-	//     	// var n = Vac.find({name:name});
-	//     	// console.log(n);
- //        console.log('save ok');
-	//     }
-	//   });
-	// }
 });
 
-router.get('/article',function(req, res, next){
-	res.render('article');
+//logout
+router.get('/logout',function(req, res, next){
+	req.session.name = null;
+	res.redirect('/');
 })
 
-router.get('/logout',function(req, res, next){
-	
+//article
+router.get('/article',checkLog);
+router.get('/article',function(req, res, next){
+  Vac.find({name:req.session.name,type:"article"},function (err, data) {
+	res.render('article', {
+      vacs: data
+    });
+	}); 
+})
+
+//addarticle
+// router.get('/addarticle',checkLog);
+router.get('/addarticle',function(req, res, next){
+	res.render('addarticle');
+})
+router.post('/addarticle',function(req, res, next){
+	name = req.session.name;
+	Vac.findOne({name:name},function(err,data){
+		if(err){ 										//错误就返回给原post处（login.html) 状态码为500的错误
+			res.send(500);
+			console.log(err);
+		}else{
+			//res.send(data);
+			var date = new Date();
+			var a = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+			var doc = {name:name, title:req.body.title, contant:req.body.contant,type:"article",year:a};
+			Vac.create(doc, function(error){
+		    if(error){
+	        console.log(error);
+		    }else{
+	        console.log('save ok');
+	        res.redirect("/article");
+		    }
+		  });
+		}
+	})
+})
+
+//album
+router.get('/album',function(req, res, next){
+	res.render('album');
+})
+router.post('/album',function(req, res, next){
+	name = req.session.name;
+	Vac.findOne({name:name},function(err,data){
+		if(err){ 										//错误就返回给原post处（login.html) 状态码为500的错误
+			res.send(500);
+			console.log(err);
+		}else{
+
+		}
+	})
 })
 module.exports = router;
