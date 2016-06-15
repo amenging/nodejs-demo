@@ -1,24 +1,28 @@
 <%- include templates/header %>
-<!-- <%- name %> -->
-<!-- 这是主页
-<ul>
-	<% for(var i = 0;i < 3;i ++){ %>
-		<li>w</li>
-	<% } %>
-</ul> -->
-<!--       <% vacs.forEach(function(vacs){ %>
-        <ul>
-            <li><%= vacs.id %></li>
-            <li><%= vacs.name %></li>
-            <li><%= vacs.password %></li>
-        </ul>
-      <% }); %>
-        <% datas.all.forEach(function(i){ %>
-          <ul>
-            <li><%= i.name %></li>
-            <li><%= i.password %></li>
-          </ul>
-        <% }); %> -->
-      <!--  <a href="">del</a> -->
+<!-- 
+  <%- name %>
+  这是主页
+  <ul>
+  	<% for(var i = 0;i < 3;i ++){ %>
+  		<li>w</li>
+  	<% } %>
+  </ul>
 
+  <% vacs.forEach(function(vacs){ %>
+    <ul>
+        <li><%= vacs.id %></li>
+        <li><%= vacs.name %></li>
+        <li><%= vacs.password %></li>
+    </ul>
+  <% }); %>
+
+  <% datas.all.forEach(function(i){ %>
+    <ul>
+      <li><%= i.name %></li>
+      <li><%= i.password %></li>
+    </ul>
+  <% }); %> 
+-->
+<%- css %>
+<%- message %>
 <%- include templates/footer %>
