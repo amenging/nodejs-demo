@@ -1,4 +1,4 @@
-### get started
+### getting started
 * npm install
 * gulp
 * node 'bin/www'
