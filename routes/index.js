@@ -121,13 +121,13 @@ router.get('/addarticle',function(req, res, next){
 router.post('/addarticle',function(req, res, next){
 	name = req.session.name;
 	Vac.findOne({name:name},function(err,data){
-		if(err){ 										//错误就返回给原post处（login.html) 状态码为500的错误
+		if(err){
 			res.send(500);
 			console.log(err);
 		}else{
-			//res.send(data);
 			var date = new Date();
-			var a = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+			var mon = date.getMonth() + 1;
+			var a = date.getFullYear() + "-" + mon + "-" + date.getDate();
 			var doc = {name:name, title:req.body.title, contant:req.body.contant,type:"article",year:a};
 			Vac.create(doc, function(error){
 		    if(error){
@@ -146,14 +146,47 @@ router.get('/album',function(req, res, next){
 	res.render('album');
 })
 router.post('/album',function(req, res, next){
-	name = req.session.name;
-	Vac.findOne({name:name},function(err,data){
-		if(err){ 										//错误就返回给原post处（login.html) 状态码为500的错误
-			res.send(500);
-			console.log(err);
-		}else{
-
-		}
-	})
+	var form = new formidable.IncomingForm();   //创建上传表单
+    form.encoding = 'utf-8';		//设置编辑
+    if(!fs.existsSync('../public/img/' + req.session.name)){
+    	var s = fs.mkdirSync('../public/img/' + req.session.name);
+    }
+    form.uploadDir = '../public/img/' + req.session.name + '/';	 //设置上传目录
+    console.log(form.uploadDir);
+    form.keepExtensions = true;	 //保留后缀
+    form.maxFieldsSize = 2 * 1024 * 1024;   //文件大小
+  	form.parse(req, function(err, fields, files) {
+	    if (err) {
+	      res.locals.error = err;
+	      res.render('index', { title: TITLE });
+	      return;		
+	  }  
+    var extName = '';  //后缀名
+    switch (files.fulAvatar.type) {
+      case 'image/pjpeg':
+        extName = 'jpg';
+        break;
+      case 'image/jpeg':
+        extName = 'jpg';
+        break;		 
+      case 'image/png':
+        extName = 'png';
+        break;
+      case 'image/x-png':
+        extName = 'png';
+        break;		 
+    }
+    if(extName.length == 0){
+        res.locals.error = '只支持png和jpg格式图片';
+        res.render('album');
+        return;				   
+    }
+    var avatarName = Math.random() + '.' + extName;
+    var newPath = form.uploadDir + avatarName;
+    console.log(newPath);
+    fs.renameSync(files.fulAvatar.path, newPath);  //重命名
+  });
+  res.locals.success = '上传成功';
+  res.render('album');
 })
 module.exports = router;
