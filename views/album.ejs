@@ -1,0 +1,108 @@
+<%- include templates/header %>
+照片列表
+<body>
+  <div id="container" class="container">
+
+		<form class="form-horizontal log_div" role="form" method="post" enctype='multipart/form-data'>
+			<div class="form-group">
+			  <div class="col-sm-2">
+			    <input id="fulAvatar" type="file" class="form-control" name="fulAvatar" id="fulAvatar" multiple>
+			  	<input id="t1" class="form-control btn btn-primary" value="上传照片" onclick="fulAvatar.click()" style="position: absolute;top:0"></input>
+			  </div>
+			 </div>
+			 <div class="form-group">
+			  <div class="col-sm-2">
+			  	<input id="btnSub" type="submit" class="form-control btn btn-primary" value="确认上传"></input>
+			  </div>
+			</div>
+		</form>
+		<% if (locals.success) { %> 
+      <div id="alt_sucess" class="alert alert-success"> 
+      <%- success %> 
+      </div> 
+    <% } %> 
+    <% if (locals.error) { %> 
+	    <div id="alt_warning" class="alert alert-warning"> 
+	      <%= error %> 
+	    </div> 
+    <% } %> 
+	</div>
+<div class="output" id="out">
+	图片预览<br>
+</div>
+<style type="text/css">
+	.img {
+		width: 100px;
+	}
+</style>
+<script type="text/javascript">
+	var input = document.getElementById("fulAvatar");
+	var imageType = /image.*/;
+	var getOnloadFunc = function(aImg) {
+		return function(evt) {
+			aImg.src = evt.target.result;
+		};
+	}
+	input.addEventListener("change", function(evt) {
+	  for (var i = 0, numFiles = this.files.length; i < numFiles; i++) {
+	    var file = this.files[i];
+	    if (!file.type.match(imageType)) {
+	      continue;
+	    }
+		  var img = document.createElement("img");
+		  var out = document.getElementById("out");
+		 	img.className = "img";
+		 	out.appendChild(img);
+
+		  var reader = new FileReader();
+		  reader.onload = getOnloadFunc(img);
+		  reader.readAsDataURL(file);
+	  }
+	}, false);
+</script>
+<script src="/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+  String.prototype.format = function (args) {
+      var result = this;
+      if (arguments.length > 0) {
+        if (arguments.length == 1 && typeof (args) == "object") {
+          for (var key in args) {
+            if (args[key] != undefined) {
+              var reg = new RegExp("({" + key + "})", "g");
+              result = result.replace(reg, args[key]);
+            }
+          }
+        }
+        else {
+          for (var i = 0; i < arguments.length; i++) {
+            if (arguments[i] != undefined) {
+              var reg = new RegExp("({)" + i + "(})", "g");
+              result = result.replace(reg, arguments[i]);
+            }
+          }
+        }
+      }
+      return result;
+  }
+  $(function(){
+    $('#btnSub').on('click',function(){		   
+      var fulAvatarVal = $('#fulAvatar').val(),  
+        errorTip = '<div id="errorTip" class="alert alert-warning">{0}</div> ';  
+
+      $("#errorTip,#alt_warning").remove();
+      
+      if(fulAvatarVal.length == 0)
+      {
+        $("#container").prepend(errorTip.format('请选择要上传的文件'));								
+        return false;
+      }
+      var extName = fulAvatarVal.substring(fulAvatarVal.lastIndexOf('.'),fulAvatarVal.length).toLowerCase();
+      if(extName != '.png' && extName != '.jpg'){
+         $("#container").prepend(errorTip.format('只支持png和jpg格式图片'));							 
+         return false;				
+      }
+      return true;				
+    })
+  });
+</script>
+<%- include templates/footer %>
