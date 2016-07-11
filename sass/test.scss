@@ -3,3 +3,37 @@
 		float: left;
 	}
 }
+.photos {
+	margin-top: 10px;
+  padding: 0;
+  li {
+		float: left;
+		list-style: none;
+		margin: 5px;
+  }
+  li:first-child {
+  	margin-left: 0;
+  }
+  li div {
+		width: 160px;
+		height: 150px;
+		border: 1px solid #ccc;
+		overflow: hidden;
+		line-height: 150px;
+		text-align: center;
+		background: #eee;
+  }
+  .addphoto div {
+		border: 2px dashed #ccc;
+		font-size: 13em;
+		color: #eee;
+		background: #fff;
+		cursor: pointer;
+  }
+}
+.output {
+	border: 1px solid #ccc;
+	.img {
+		width: 100px;
+	}
+}
