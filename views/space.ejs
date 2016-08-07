@@ -1,0 +1,24 @@
+<%- include templates/header %>
+<div class="btn btn-primary" style="width: 100%;margin-bottom: 10px;">照片列表</div>
+<ul class="photos col-sm-12">
+	<% for (var i = 0;i < path.length;i ++) {%>
+	<li>
+		<div><img src="<%= path[i] %>" class="photos img-thumbnail"></div>
+	</li>
+	<% } %>
+</ul>
+<div class="btn btn-primary" style="width: 100%;margin-bottom: 10px;">文章列表</div>
+<div style="margin-top: 1em" class="col-sm-12">
+	<% vacs.forEach(function(vacs){ %>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"><%= vacs.title %></h3>
+		</div>
+		<div class="panel-body">
+			<div style="color: #777;font-size: .9em;">作者:<%= vacs.name %> | 时间:<%= vacs.year %></div>
+			<%= vacs.contant %>
+		</div>
+	</div>
+	<% }); %>
+</div>
+<%- include templates/footer %>
