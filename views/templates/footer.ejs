@@ -11,6 +11,9 @@
 				$(".my-toggle",".my-toggle b").css("display","block");
 			}
 			fooN($('.articles>div'),3);
+			if($(".articles")){
+      	select();
+      }
 			function fooN(obj,per){ 
 				var articles = $(obj);
 				if(articles.length>1){ //obj表示需要进行分页的div
@@ -65,6 +68,26 @@
             });
           });
         }
+      }
+      function select(){
+      	var all_article = $('.articles_div'); //把所有文章先赋给all_article
+      	var titles = $(".titles");
+      	$('.article_search').on('keyup change',function(){ //绑定keyup和change事件
+      		if($(this).val().replace(/\s+/) != ''){
+						var a = $(this).val();
+			      var article = [];
+			      for(var i = 0;i < titles.length;i ++){
+			      	var text = $(titles[i]).text();
+			      	if(text.indexOf(a) != -1){ //若titles内含有搜索文本
+			      		article.push($(titles[i]).parent().parent()); //选取它所在的div
+			      	}
+			      }
+			      $('.articles').html(article);
+      		}else{
+      			$('.articles').html(all_article); //当搜索条件为空时，展现所有文章
+      		}
+      		fooN($('.articles>div'),3);
+      	});
       }
      
 		});
