@@ -4,7 +4,6 @@
 	}
 }
 .photos {
-	margin-top: 10px;
   padding: 0;
   li {
 		float: left;
@@ -19,7 +18,7 @@
 		height: 150px;
 		border: 1px solid #ccc;
 		overflow: hidden;
-		line-height: 150px;
+		line-height: 148px;
 		text-align: center;
 		background: #eee;
   }
@@ -37,3 +36,28 @@
 		width: 100px;
 	}
 }
+.users {
+  border-bottom: 1px solid #ccc;
+}
+.users:last-child {
+  border-bottom: 0;
+ }
+ 	.pages {
+		height: 40px;
+		margin: auto;
+		li {
+			list-style: none;
+			float: left;
+			width: 34px;
+			height: 34px;
+			color: #777;
+			margin-left: -1px;
+			line-height: 34px;
+			text-align: center;
+			border: 1px solid #ccc;
+			transition: .3s;
+		}
+		li:hover {
+			cursor: pointer;
+		}
+	}
