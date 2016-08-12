@@ -23,7 +23,15 @@
   },
   "main": "app.js",
   "devDependencies": {},
-  "author": "",
+  "author": "amenging",
   "license": "ISC",
-  "description": ""
+  "description": "* npm install\r * node 'bin/www'",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amenging/nodejs-demo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/amenging/nodejs-demo/issues"
+  },
+  "homepage": "https://github.com/amenging/nodejs-demo#readme"
 }
