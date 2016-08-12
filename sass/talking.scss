@@ -1,0 +1,139 @@
+.grey {
+	background: #f2f2f2;
+}
+.red {
+	color: red;
+}
+//聊天窗口
+.chat-body{
+	overflow-y:scroll;
+	height:425px;
+	padding:0px;
+	.msg-list-body{
+		margin:8px;
+		li {
+			width: 100%;
+			list-style: none;
+			margin: 5px 0;
+			padding: 0;
+		}
+		.all_msg, .my_msg {
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			max-width: 600px;
+			word-wrap: break-word;
+			margin-top: 1.5em;
+		}
+		.all_msg {
+			margin-left: 15px;
+			float: left;
+			padding: 5px 10px 5px 0;
+		}
+		.my_msg {
+			float: right;
+			margin-right: 6px;
+			padding: 5px 0 5px 10px;
+		}
+		.user_me, .user {
+			line-height: 20px;
+		}
+		.user_me {
+			float: right;
+		}
+		.user {
+			width: 40px;
+			float: left;
+		}
+	 .left {
+			float: left;
+			left: -10px;
+			background: url('/img/left.png');
+			height: 13px;
+			position: relative;
+			width: 10px;
+		}
+		.right {
+			background: url('/img/right.png');
+			height: 13px;
+			position: relative;
+			width: 10px;
+			float: right;
+			left: 10px;
+		}
+	}
+}
+.if_none { //无输入提示
+ 	bottom: 74px;
+  color: red;
+  height: 20px;
+  position: absolute;
+}
+.clear_msg { //清屏
+	position: absolute;
+	right: 23px;
+	top: 3px;
+}
+//用户列表
+.list-body{
+	overflow-y:scroll;
+	height:450px;
+	padding:0px;
+	.list-table{
+		margin-top: -1px;
+		margin-bottom: 0px;
+		li {
+			height: 30px;
+			line-height: 30px;
+			list-style: outside none none;
+			text-indent: 12px;
+			// cursor: pointer;
+		}
+	}
+}
+//表情面板
+.emoji {
+	img {
+    width: 38px;
+    max-height: 38px;
+	}
+	width: 281px;
+	height: 159px;
+	position: absolute;
+	top: -161px;
+	background: #fff;
+	.images {
+		width: 281px;
+		height: 127px;
+		li {
+	 		border-bottom: 1px solid #ccc;
+	    border-right: 1px solid #ccc;
+	    float: left;
+	    height: 40px;
+	    line-height: 40px;
+	    list-style: outside none none;
+	    width: 40px;
+		}
+		li:hover {
+			border-bottom-color: #00f;
+			box-shadow: 0 1px 3px #ccc;
+		}
+	}
+	.foon_pages {
+		margin: auto;
+		float: right;
+		padding: 0;
+		li{
+			font-size: 15px!important;
+			float: left;
+			list-style: none;
+			padding: 0 9px;
+			cursor: pointer;
+			border: 1px solid;
+		}
+	}
+}
+
+
+
+		
+		

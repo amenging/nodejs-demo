@@ -28,6 +28,7 @@
 		color: #eee;
 		background: #fff;
 		cursor: pointer;
+		line-height: 127px;
   }
 }
 .output {
@@ -42,22 +43,23 @@
 .users:last-child {
   border-bottom: 0;
  }
- 	.pages {
-		height: 40px;
-		margin: auto;
-		li {
-			list-style: none;
-			float: left;
-			width: 34px;
-			height: 34px;
-			color: #777;
-			margin-left: -1px;
-			line-height: 34px;
-			text-align: center;
-			border: 1px solid #ccc;
-			transition: .3s;
-		}
-		li:hover {
-			cursor: pointer;
-		}
+.articles .foon_pages {
+	padding: 0;
+	height: 40px;
+	margin: auto;
+	li {
+		list-style: none;
+		float: left;
+		width: 34px;
+		height: 34px;
+		color: #777;
+		margin-left: -1px;
+		line-height: 34px;
+		text-align: center;
+		border: 1px solid #ccc;
+		transition: .3s;
 	}
+	li:hover {
+		cursor: pointer;
+	}
+}
