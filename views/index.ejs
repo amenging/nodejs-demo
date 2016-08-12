@@ -1,28 +1,15 @@
 <%- include templates/header %>
-<!-- 
-  <%- name %>
-  这是主页
-  <ul>
-  	<% for(var i = 0;i < 3;i ++){ %>
-  		<li>w</li>
-  	<% } %>
-  </ul>
-
+<style>#testactive{background:#333}</style>
+<div class="panel panel-primary pull-right">
+  <div class="panel-heading">
+    <h3 class="panel-title">推荐用户</h3>
+  </div>
   <% vacs.forEach(function(vacs){ %>
-    <ul>
-        <li><%= vacs.id %></li>
-        <li><%= vacs.name %></li>
-        <li><%= vacs.password %></li>
-    </ul>
+      <div class="panel-body users" style="padding: 10px 60px 10px 10px">
+        <a href="/<%= vacs.name %>/space"><%= vacs.name %></a>
+      </div>
   <% }); %>
-
-  <% datas.all.forEach(function(i){ %>
-    <ul>
-      <li><%= i.name %></li>
-      <li><%= i.password %></li>
-    </ul>
-  <% }); %> 
--->
-<%- css %>
+</div>
+<butto class="btn"><a href="/talking">聊天室</a></button>
 <%- message %>
 <%- include templates/footer %>

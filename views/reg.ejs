@@ -1,26 +1,27 @@
 <%- include templates/header %>
+  <style>#testactive2{background:#333}</style>
 	<form class="form-horizontal reg_div" role="form" method="post">
-   <div class="form-group">
-    <div class="col-sm-5">
-      <input type="text" name="name" class="form-control name" id="firstname" placeholder="请输入名字">
+    <div class="form-group">
+      <div class="col-sm-5">
+        <input type="text" name="name" class="form-control name" id="firstname" placeholder="请输入昵称(3-6位字符),可包含字母,数字和下划线">
+      </div>
     </div>
-   </div>
-   <div class="form-group">
-    <div class="col-sm-5">
-      <input type="password" class="form-control password" name="password" id="lastname" placeholder="请输入密码">
+    <div class="form-group">
+      <div class="col-sm-5">
+        <input type="password" class="form-control password" name="password" placeholder="请输入密码(6-16位字符),可包含字母和数字,以字母开头">
+      </div>
     </div>
-   </div>
-   <div class="form-group">
-    <div class="col-sm-5">
-      <input type="password" class="form-control repass" name="repass" id="lastname" placeholder="重复密码">
+    <div class="form-group">
+      <div class="col-sm-5">
+        <input type="password" class="form-control repass" name="repass" placeholder="重复密码">
+      </div>
     </div>
-   </div>
-   <div class="form-group">
-    <div class="col-sm-5">
-    	<button type="submit" class="btn btn-default log">注册</button>
+    <div class="form-group">
+      <div class="col-sm-5">
+      	<button type="submit" class="btn btn-default log">注册</button>
+      </div>
     </div>
-   </div>
 	</form>
+<div class="message"></div>
 <%- message %>
-<%- css %>
 <%- include templates/footer %>

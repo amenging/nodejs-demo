@@ -1,0 +1,49 @@
+<%- include templates/header %>
+<div class="row talking">
+	<div class="col-sm-8">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="glyphicon glyphicon-earphone"></span>
+				&nbsp;聊天室
+				<button class="btn btn-info clear_msg">清屏</button>
+			</div>
+			<div class="panel-body chat-body">
+				<div class="msg-list-body" id="msg" style="overflow:auto">
+				<!-- 消息框 -->
+				</div>
+			</div>
+		</div>
+		<div class="if_none"></div><!-- 如果用户没有输入或输入空字符串 -->
+		<div class="input-group input-group-lg">
+			<span class="input-group-btn">
+				<button type="button" id="emotion-btn" class="btn btn-default">
+					<img style="width:24px;height:24px;" src="/img/emotion_smile.png">
+				</button>
+				<div class="emoji" id="emoji">
+					<div class="images"></div>
+				</div>
+			</span>
+			<input type="text" id="input-edit" class="form-control col-sm-8" contenteditable="true">
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-default sendMessage">
+					发送
+					<span class="glyphicon glyphicon-send"></span>
+				</button>
+			</span>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="glyphicon glyphicon-list"></span>
+				&nbsp;在线用户
+			</div>
+			<div class="panel-body list-body">
+				<div class="table table-hover list-table">
+				</div>
+			</div>
+			<div id="list-count" class="panel-footer">当前在线：<span class="user_num"></span>人</div>
+		</div>
+	</div>
+</div>
+<%- include templates/footer %>
