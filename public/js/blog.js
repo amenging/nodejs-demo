@@ -1,6 +1,6 @@
 $(function(){
+	//==================reg页面============================
 		if($('.reg_div').text() != ''){
-			// function
 			var errorTip = '<div id="errorTip" class="alert alert-warning">{0}</div> ';
 			var reg = /[a-zA-Z0-9_]{2,6}/,
 				reg1 = /^[a-zA-Z]\w{5,16}$/;
@@ -16,14 +16,13 @@ $(function(){
 		     reg1.test($('.password').val()) == true && 
 		     $('.password').val() == $('.repass').val()){
 	        return true;
-		    }else{  
+		    }else{ //错误则不向后台传输数据
 	        return false;
 		    }  
 			}); 
 		}
-	//===========在album页面执行==========================
+	//==================album页面==========================
 		if($('.img_pre').text() != ''){
-			$(function(){
 				$('#fulAvatar').on("change", function(evt) { //图片预览
 				 	for (var i = 0, numFiles = this.files.length; i < numFiles; i++) {
 					 	var file = this.files[i];
@@ -37,7 +36,7 @@ $(function(){
 				});
 				$(".addPdiv").click(function(){ //添加图片按钮
 					$(".img_pre, .upload").removeClass('hide');
-				})
+				});
 				$('#btnSub').on('click',function(){ //图片上传
 					var fulAvatarVal = $('#fulAvatar').val(), 
 						errorTip = '<div id="errorTip" class="alert alert-warning">{0}</div> ';
@@ -52,10 +51,21 @@ $(function(){
 						 return false;
 					}
 					return true;
-				})
-			});
+				});
+				photoView($('.photos img')); //图片浏览
+				fooN('.photos li', '.album', 12); //分页
+				colorToggle($(".foon_pages li"),{ //颜色
+						"background":"#428BCA","color":"#fff","border-color":"#428BCA"
+					},
+					{
+						"background":"#fff","color":"#428BCA","border-color":"#ccc"
+					},
+					{
+						"background":"#eee","color":"#428BCA","border-color":"#ccc"
+				});
+				
 		}
-	//===========在talking页面执行==========================
+	//==================talking页面========================
 		if($('.talking .panel-heading').text() != ''){
 			var socket = io.connect({'log level': 2,'pingTimeout':300000,'pingInterval':1000});
 			socket.on('connect',function(){
@@ -99,7 +109,7 @@ $(function(){
 				$('#msg').empty();
 			});
 		}
- 	//===================在article页面执行=========================
+ 	//==================article页面========================
 		if($(".articles").text() != ''){
 			fooN($('.articles>div'),$('.articles'),3);
 			colorToggle($(".foon_pages li"),{
@@ -110,11 +120,11 @@ $(function(){
 				},
 				{
 					"background":"#eee","color":"#428BCA","border-color":"#ccc"
-				});
+			});
 			search();
 		}
 	//=============
-		String.prototype.format = function (args) {
+		String.prototype.format = function (args) { //提示框
 			var result = this;
 			if (arguments.length > 0) {
 				if (arguments.length == 1 && typeof (args) == "object") {
@@ -170,9 +180,9 @@ $(function(){
 				$(".foon_pages").css("width",l);
 			}
 		}
-		function colorToggle(obj,a,b,c){ //标签切换样式,obj表示标签数组,a表示标签在click后的样式
-			var fir = $(obj).first();		//b表示普通状态的样式,c表示获得焦点时的样式
-			$(fir).css(a).siblings().css(b).hover(function(){
+		function colorToggle(obj,a,b,c){ //标签切换样式,
+			var fir = $(obj).first();		//obj表示标签数组,a表示标签在click后的样式,
+			$(fir).css(a).siblings().css(b).hover(function(){ //b表示普通状态的样式,c表示获得焦点时的样式
 				$(this).css(c);
 			},function(){
 				$(this).css(b);
@@ -306,7 +316,7 @@ $(function(){
 				});
 			}
 		}
-		function send_emoji(msg){
+		function send_emoji(msg){ //发送表情
 			var reg = /\[#emoji:\d+\]/g; //匹配表情
 			while(match = reg.exec(msg)){ //当msg中还有与正则表达式匹配的字符时
 				emojiIndex = match[0].slice(8, -1);
@@ -314,12 +324,112 @@ $(function(){
 			}
 			return msg;
 		}
-	 // 	function getTime(){ //获取时间，格式为00:00
-		// 	var date = new Date();
-		// 	var hour = date.getHours(), //获取当前小时数(0-23)
-		// 	min = date.getMinutes(), //获取当前分钟数(0-59)
-		// 	sec = date.getSeconds(); //获取当前秒数(0-59)
-		// 	var time = hour + ":" + min + ":" + sec;
-		// 	return time;
-		// }
+		function photoView(obj){ //图片弹出层
+			var errorTip = '<div id="errorTip" class="alert alert-info">{0}</div> '; //定义错误提示
+			$('.view_div').append("<img>" + //将组件加入文档
+				"<div class='icon'><i class='glyphicon glyphicon-remove'></i></div>" +
+				"<div class='lt_icon'><i class='glyphicon glyphicon-chevron-left'></i></div>" +
+				"<div class='rt_icon'><i class='glyphicon glyphicon-chevron-right'></i></div>");
+			for(var i = 0;i < obj.length; i ++){ //为元素添加点击事件
+				$(obj[i]).attr('value',i);
+				$(obj[i]).on('click',function(){
+					$('.view').show();
+					$('.view_div').show();
+					$('.view_div img').attr({ //获取src
+						"src": $(this).attr('src'),
+						'value': $(this).attr('value')
+					});
+					$('.view_div').animate({ //渐变显示
+						'opacity':1
+					},1000);
+					$(".view_div").one().append(errorTip.format('方向键翻页'));
+					$('.view_div .alert').fadeOut(3000);
+					$("body").css({ //隐藏滚动条
+						"overflow":"hidden"
+					});
+					view();
+				});
+			};
+			$('.rt_icon').click(function(){ //右切换
+				var index = $(this).siblings('img').attr('value');
+				index = 1 + parseInt(index); //将value值转为数字并+1
+				if(index >= obj.length-1){ //当index数量到达上限时出现提示框
+					index = obj.length-1;
+					$(".view_div").one().append(errorTip.format('没有更多了'));
+					$('.view_div .alert').fadeOut(2000);
+				}
+				src = $(obj[index]).attr('src'); //获取新的src
+				$(this).siblings('img').attr({ //更新弹出层图片的src
+					'src': src,
+					'value': index
+				})
+				view();
+			});
+			$('.lt_icon').click(function(){ //左切换
+				var index = $(this).siblings('img').attr('value');
+				index = parseInt(index) - 1;
+				if(index <= 0){
+					index = 0;
+					$(".view_div").one().append(errorTip.format('没有了哦，请往右翻吧'));
+					$('.view_div .alert').fadeOut(2000);
+				}
+				src = $(obj[index]).attr('src');
+				$(this).siblings('img').attr({
+					'src': src,
+					'value': index
+				})
+				view();
+			});
+			$('body').keydown(function(event){ //键盘左右事件
+				if (event.keyCode == 37) {
+					$('.lt_icon').click();
+				}
+				event.stopPropagation();
+			});
+			$('body').keydown(function(event){
+				if (event.keyCode == 39) {
+					$('.rt_icon').click();
+				}
+			});
+			$('.view_div .icon').click(function(){ //点击x和点击透明遮罩效果一致
+				$('.view').click();
+			});
+			$('.view').on('click',function(){
+				$(this).hide();
+				$('.view_div').hide();
+				$("body").css({
+					"overflow":"auto"
+				});
+			});
+			view();
+			$(window).resize(function(){ //当窗口大小改变时重新执行函数
+				view();
+				if($('.view').css('display') == 'block'){
+					$('.view').show();
+				}else{
+					$('.view').hide();
+				}
+			});
+			function view(){
+				var window_wd = $(window).width(), //获取window宽高
+					window_ht = $(window).height();
+				var img_wd = window_wd*0.8, //计算图片宽高
+					img_ht = window_ht*0.8;
+				$('.view').css({ //为透明遮罩添加样式
+					'width': window_wd, 
+					'height': window_ht
+				}); //滚动条宽度不确定
+				$('.view_div').css({ //为弹出窗添加样式使其居中
+					'left': (window_wd-$('.view_div img').width())/2,
+					'top': (window_ht-$('.view_div img').height())/2
+				})
+				$('.view_div img').css({ //为弹出窗显示的图片限制宽高
+					'max-width': img_wd,
+					'max-height': img_ht
+				});
+				$('.lt_icon, .rt_icon').css({ //给左右按钮定位
+					'margin-top': -($('.view_div img').height()/2+5)
+				})	
+			}
+		}
 });

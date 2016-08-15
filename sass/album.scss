@@ -1,0 +1,90 @@
+.view {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, .7);
+	z-index: 2222;
+}
+.view_div {
+	position: absolute;
+	z-index: 2333;
+	margin: 0;
+	top: 0;
+	opacity: 0;
+	display: none;
+	border: 5px solid #fff;
+	.icon {
+		right: -16px;
+		top: -16px;
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		border-radius: 20px;
+		background: #000;
+		color: #fff;
+		text-align: center;
+		line-height: 20px;
+		border: 1px solid #fff;
+		cursor: pointer;
+	}
+	.lt_icon {
+		background: rgba(0, 0, 0, .5);
+		color: #ccc;
+		font-size: 20px;
+		height: 50px;
+		left: -57px;
+		line-height: 50px;
+		position: absolute;
+		text-align: center;
+		width: 50px;
+		cursor: pointer;
+		transition: .3s;
+	}
+	.rt_icon {
+		background: rgba(0, 0, 0, .5);
+		color: #ccc;
+		line-height: 50px;
+		position: absolute;
+		right: -57px;
+		text-align: center;
+		width: 50px;
+		font-size: 20px;
+		height: 50px;
+		cursor: pointer;
+		transition: .3s;
+	}
+	.lt_icon:hover, .rt_icon:hover {
+		background: rgba(0, 0, 0, .6);
+		color: #eee;
+	}
+	.alert {
+		position: absolute;
+		top: 50%;
+		width: 100%;
+		text-align: center;
+	}
+}
+.album {
+	.foon_pages {
+		padding: 0;
+		height: 40px;
+		margin: auto;
+		li {
+		list-style: none;
+		float: left;
+		width: 34px;
+		height: 34px;
+		color: #777;
+		margin-left: -1px;
+		line-height: 34px;
+		text-align: center;
+		border: 1px solid #ccc;
+		transition: .3s; 
+		}
+		li:hover {
+			cursor: pointer; 
+		}
+	}
+}
+

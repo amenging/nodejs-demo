@@ -14,6 +14,21 @@ function checkLog(req,res){
 		res.redirect('/login');
 	}
 }
+function addZero(obj){
+  return obj.toString().length <= 1?'0' + obj:obj;
+}
+function html_encode(str) { //将用户输入的特殊字符进行转义
+	var s = ""; 
+	if (str.length == 0) return ""; 
+	s = str.replace(/&/g, "&gt;"); 
+	s = s.replace(/</g, "&lt;"); 
+	s = s.replace(/>/g, "&gt;"); 
+	s = s.replace(/ /g, "&nbsp;"); 
+	s = s.replace(/\'/g, "&#39;"); 
+	s = s.replace(/\"/g, "&quot;"); 
+	s = s.replace(/\n/g, "<br>"); 
+	return s; 
+}
 router.get('/', function (req, res, next) {
   Vac.find({type:'user',name:{$nin:req.session.name}},function (err, data) {
   	res.render('index', {
@@ -132,15 +147,16 @@ router.post('/change',function(req, res, next){
 			console.log(err);
 		}else{
 			var date = new Date();
-			var mon = date.getMonth() + 1, sec = date.getSeconds();
-			if(mon.toString().length <= 1){
-				mon = "0" + mon;
-			}
-			if(sec.toString().length <= 1){
-				sec = "0" + sec;
-			}
-			var a = date.getFullYear() + '-' + mon + '-' + date.getDate() + ' ' +
-							date.getHours() + ':' + date.getMinutes()+ ':' + sec;
+			var mon = date.getMonth() + 1, 
+			 ho = date.getHours(), 
+			 min = date.getMinutes(),
+			 sec = date.getSeconds();
+			mon1 = addZero(mon);
+			ho1 = addZero(ho);
+			min1 = addZero(min);
+			sec1 = addZero(sec);
+			var a = date.getFullYear() + '-' + mon1 + '-' + date.getDate() + ' ' +
+							ho1 + ':' + min1 + ':' + sec1;
 			data.contant = req.body.contant, data.title = req.body.title,data.year = a;
 			data.save();
 			res.redirect(req.session.name + '/article');
@@ -160,15 +176,16 @@ router.post('/addarticle',function(req, res, next){
 			console.log(err);
 		}else{
 			var date = new Date();
-			var mon = date.getMonth() + 1, sec = date.getSeconds();
-			if(mon.toString().length <= 1){
-				mon = "0" + mon;
-			}
-			if(sec.toString().length <= 1){
-				sec = "0" + sec;
-			}
-			var a = date.getFullYear() + '-' + mon + '-' + date.getDate() + ' ' +
-							date.getHours() + ':' + date.getMinutes()+ ':' + sec;
+			var mon = date.getMonth() + 1, 
+			 ho = date.getHours(), 
+			 min = date.getMinutes(),
+			 sec = date.getSeconds();
+			mon1 = addZero(mon);
+			ho1 = addZero(ho);
+			min1 = addZero(min);
+			sec1 = addZero(sec);
+			var a = date.getFullYear() + '-' + mon1 + '-' + date.getDate() + ' ' +
+							ho1 + ':' + min1 + ':' + sec1;
 			var doc = {name:name, title:req.body.title, contant:req.body.contant,type:'article',year:a};
 			Vac.create(doc, function(error){
 		    if(error){
