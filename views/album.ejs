@@ -1,18 +1,9 @@
 <%- include templates/header %>
 		<div class="album">
-			<div class="btn btn-primary" style="width: 100%;margin-bottom: 10px;">照片列表</div><br>
-				<ul class="photos col-sm-12">
-					<% for (var i = 0;i < path.length;i ++) {%>
-					<li>
-						<div><img src="<%= path[i] %>" class="photos img-thumbnail"></div>
-					</li>
-					<% } %>
-					<li class="addphoto" id="t1" onclick="fulAvatar.click()">
-						<div class="addPdiv">+</div>
-					</li>
-				</ul>
-				<br>
-				<form class="form-horizontal log_div" role="form" method="post" enctype='multipart/form-data'>
+			<div class="btn btn-primary col-sm-9" style="margin-bottom: 10px;">照片列表</div>
+			<div class="btn btn-primary col-sm-1 col-sm-offset-1 addPdiv" style="margin-bottom: 10px;" id="t1" onclick="fulAvatar.click()"><i class="glyphicon glyphicon-plus"></i></div>
+			<br>
+			<form class="form-horizontal log_div" role="form" method="post" enctype='multipart/form-data'>
 					<div class="form-group">
 						<div class="col-sm-2">
 							<input id="fulAvatar" type="file" class="form-control hide" name="fulAvatar" multiple>
@@ -24,17 +15,29 @@
 							<div class="output" id="out"></div>
 						</div>
 						<div class="col-sm-2">
-							<input id="btnSub" type="submit" class="hide upload form-control btn btn-primary" value="确认上传">
+							<input id="btnSub" type="submit" class="hide upload form-control btn btn-info" value="确认上传" style="margin-top: 20px;">
 						</div>
 					</div>
 				</form>
+				<ul class="photos col-sm-12">
+					<% for (var i = 0;i < path.length;i ++) { %>
+					<li>
+						<div><img src="<%= path[i] %>" class="photos img-thumbnail"></div>
+					</li>
+					<% } %>
+					<!-- <li class="addphoto" id="t1" onclick="fulAvatar.click()">
+						<div class="addPdiv">+</div>
+					</li> -->
+				</ul>
+				<br>
+				
 				<% if (locals.success) { %> 
 					<div id="alt_sucess" class="alert alert-success"> 
 					<%- success %> 
 					</div> 
 				<% } %> 
 				<% if (locals.error) { %> 
-					<div id="alt_warning" class="alert alert-warning"> 
+					<div id="alt_warning" class="alert alert-warning">
 						<%= error %> 
 					</div> 
 				<% } %>
@@ -42,93 +45,4 @@
 				<div class='view_div'></div>
 		</div>
 	</div>
-	<!--<style type="text/css">
-		.view {
-			display: none;
-			position: absolute;
-			top: 0;
-			left: 0;
-			background: rgba(0, 0, 0, .7);
-			z-index: 2222;
-		}
-		.view_div {
-			position: absolute;
-			z-index: 2333;
-			margin: 0;
-			top: 0;
-			opacity: 0;
-			display: none;
-			border: 5px solid #fff;
-		}
-		.view_div .icon {
-			right: -16px;
-			top: -16px;
-			position: absolute;
-			width: 20px;
-			height: 20px;
-			border-radius: 20px;
-			background: #000;
-			color: #fff;
-			text-align: center;
-			line-height: 20px;
-			border: 1px solid #fff;
-			cursor: pointer;
-		}
-		.view_div .lt_icon {
-			background: rgba(0, 0, 0, .5);
-	    color: #ccc;
-	    font-size: 20px;
-	    height: 50px;
-	    left: -57px;
-	    line-height: 50px;
-	    position: absolute;
-	    text-align: center;
-	    width: 50px;
-	    cursor: pointer;
-	    transition: .3s;
-		}
-		.view_div .rt_icon {
-			background: rgba(0, 0, 0, .5);
-			color: #ccc;
-			line-height: 50px;
-			position: absolute;
-			right: -57px;
-			text-align: center;
-			width: 50px;
-	    font-size: 20px;
-	    height: 50px;
-	    cursor: pointer;
-	    transition: .3s;
-		}
-		.view_div .lt_icon:hover, .view_div .rt_icon:hover {
-			background: rgba(0, 0, 0, .6);
-			color: #eee;
-		}
-		.view_div .alert {
-			position: absolute;
-			top: 50%;
-			width: 100%;
-			text-align: center;
-		}
-		.foon_pages {
-		  padding: 0;
-		  height: 40px;
-		  margin: auto;
-		}
-		 .foon_pages li {
-	    list-style: none;
-	    float: left;
-	    width: 34px;
-	    height: 34px;
-	    color: #777;
-	    margin-left: -1px;
-	    line-height: 34px;
-	    text-align: center;
-	    border: 1px solid #ccc;
-	    transition: .3s; 
-		  }
-	  .foon_pages li:hover {
-	    cursor: pointer; 
-	  }
-	</style>-->
 <%- include templates/footer %>
