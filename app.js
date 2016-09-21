@@ -4,17 +4,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require("express-session");
+var fs = require('fs');
 // var flash = require('connect-flash');
 var routes = require('./routes/index');
 
 //conncet to mongodb
 var mongoose = require("mongoose");
-var db = mongoose.connect('mongodb://localhost/web');
-// db.vacations.create({"name":"user3","password":123456});
+var db = mongoose.connect('mongodb://localhost/web'); //
 
 var app = express();
-
-app.locals.datas = require("./demo.json");
+// app.locals.datas = require("./demo.json");
 
 app.use(session({ 
   secret: 'secret',
@@ -30,10 +29,11 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false, keepExtensions: true, upLoadDir: './public/img' }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use(flash);
+// session
 app.use(function(req,res,next){ 
   res.locals.name = req.session.name;
   var err = req.session.error;
@@ -77,6 +77,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
