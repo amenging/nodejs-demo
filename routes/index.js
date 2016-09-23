@@ -221,6 +221,7 @@ router.get('/album',function(req, res, next){
 	});
 })
 router.post('/album',function(req, res, next){
+	checkLog(req,res);
 	var form = new formidable.IncomingForm();   //创建上传表单
     form.encoding = 'utf-8';		//设置编辑
     if(!fs.existsSync('../public/img/' + req.session.name)){

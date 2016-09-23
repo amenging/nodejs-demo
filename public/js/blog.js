@@ -2,7 +2,7 @@ $(function(){
 	//==================reg页面============================
 		if($('.reg_div').text() != ''){
 			var errorTip = '<div id="errorTip" class="alert alert-warning">{0}</div> ';
-			var reg = /[a-zA-Z0-9_]{2,6}/,
+			var reg = /^[a-zA-Z0-9_]{2,6}$/, //首尾都要匹配
 				reg1 = /^[a-zA-Z]\w{5,16}$/;
 			$(".reg_div").submit(function(){
 				if(reg.test($('.name').val()) == false) {
