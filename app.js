@@ -13,7 +13,6 @@ var mongoose = require("mongoose");
 var db = mongoose.connect('mongodb://localhost/web'); //
 
 var app = express();
-// app.locals.datas = require("./demo.json");
 
 app.use(session({ 
   secret: 'secret',

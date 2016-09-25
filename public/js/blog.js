@@ -296,8 +296,8 @@ $(function(){
 			$('body').click(function(e){ //点击body事件使表情隐藏
 				if(e.target != $('.emoji')){ //阻止了事件冒泡:1、为$('.emoji')添加click事件
 					 $('.emoji').hide();			 //2、分页的切换事件function fooN()
-				}														 //3、表情按钮的click事件
-				});
+				}											       //3、表情按钮的click事件
+			});
 			$('.emoji').click(function(e){
 				e.stopPropagation(); //阻止事件冒泡
 			});
