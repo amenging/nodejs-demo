@@ -37,10 +37,9 @@ router.get('/', function (req, res, next) {
   });
 });
 //login
-router.get('/login', function(req, res, next) {
+router.route('/login').get(function(req, res, next) {
   res.render('login');
-});
-router.post('/login',function(req, res, next){
+}).post(function(req, res, next){
 	var name,password;
 	name = req.body.name,password = req.body.password;
 	Vac.findOne({name:name},function(err,data){
