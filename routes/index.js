@@ -297,4 +297,10 @@ router.get('/talking',function(req, res, next){
 	checkLog(req,res);
 	res.render('talking');
 });
+
+router.get('/game',function(req, res, next){
+	// checkLog(req,res);
+	res.render('game');
+});
+
 module.exports = router;

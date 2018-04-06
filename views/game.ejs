@@ -1,0 +1,108 @@
+<%- include templates/header %>
+	<div class="alert alert-info hidden-xs">
+		仅支持手机，或者用谷歌控制台打开
+	</div>
+	<canvas class="visible-xs" id="walking" style="border: 1px solid #ccc;" width="300%"></canvas>
+	<script type="text/javascript">
+		function Ball(color) {
+			this.x = 5;
+			this.y = 40;
+			this.radius = 5;
+			this.time = 0;
+			this.fillStyle = color?color:'#ddf';
+		}
+		Ball.prototype = {
+			drawBall: function(ctx) {
+				ctx.fillStyle = this.fillStyle;
+				ctx.beginPath();
+				ctx.arc(this.x, this.y, 5, 0, Math.PI*2, true);
+				ctx.closePath();
+				ctx.fill();
+			}
+		}
+		window.onload = function() {
+			var canvas = document.getElementById('walking');
+			var ctx = canvas.getContext('2d');
+			var clickCount = 0;
+
+			//生成小球
+			var ball1 = new Ball();
+			var ball2 = new Ball('#00f');
+			ball2.x = 15;
+
+			//添加黑色线条
+			var arr = [20, 50, 120, 170, 210, 150, 280];
+			// var arr = [20];
+			for(var i = 0; i < arr.length; i ++) {
+				ctx.fillStyle = '#000';
+				ctx.beginPath();
+				ctx.moveTo(arr[i], 45);
+				ctx.lineTo(arr[i], 70);
+				ctx.stroke();
+			}
+
+			ball1.drawBall(ctx);
+			ball2.drawBall(ctx);
+			drawLine();
+
+			//连接小球的线
+			function drawLine() {
+				ctx.strokeStyle = '#afa';
+				ctx.beginPath();
+				ctx.moveTo(ball1.x, ball1.y);
+				ctx.lineTo((ball1.x + ball2.x) /2, 0);
+				ctx.lineTo(ball2.x, ball2.y);
+				ctx.stroke();
+				ctx.closePath();
+			}
+			function drawFrame() {
+				myFrame = window.requestAnimationFrame(drawFrame, canvas);
+				ctx.clearRect(0, 0, canvas.width, 45);
+				// console.log(clickCount);
+				if(clickCount%2 !== 0) {
+					ball1.y = 39;
+					ball1.time += 1;
+					ball1.x += (ball1.x + 5<canvas.width?(ball1.time< 20?1:0):0)
+				} else {
+					ball2.y = 39;
+					ball2.time += 1;
+					ball2.x += (ball2.x + 5<canvas.width?(ball2.time< 20?1:0):0)
+					// ball2.x += (ball2.time< 20?1:0)
+				}
+
+				ball1.drawBall(ctx);
+				ball2.drawBall(ctx);
+				drawLine();
+			}
+			// if(typeof window.touchstart != 'undefined') {
+				// touchend = touchend
+			// }
+			// touchend = window.touchend?'touchend':'mouseup';
+			// touchstart = window.touchstart?'touchstart':'mousedown';
+
+			canvas.addEventListener('touchend', function() {
+				ball1.y = ball2.y = 40;
+				cancelAnimationFrame(myFrame);
+				var result = arr.find(function(val, index) {
+					return ((Math.abs(val-ball1.x)) < 5) || ((Math.abs(val-ball2.x)) < 5);
+				});
+				if(result) {
+					var win1 = confirm('失败！再来一次！');
+					window.location.reload();						
+				} else if (ball1.x+5 == canvas.width && ball2.x+5 == canvas.width){
+					var win2 = confirm('赢了！再玩一次！');
+					window.location.reload();	
+				}
+			});
+			canvas.addEventListener('touchstart', function() {
+				ball1.time = ball2.time = 0;
+				clickCount += 1;
+				drawFrame();
+			});
+		}
+	</script>
+	<script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap3.0.3.min.js"></script>
+</div>
+</body>
+</html>
