@@ -1,3 +1,5 @@
+*.bak
+package-lock.json
 /node_modules/
 /public/img/*/
 /gulp.bat
