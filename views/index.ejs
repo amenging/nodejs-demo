@@ -1,5 +1,30 @@
 <%- include templates/header %>
-<style>#testactive{background:#333}</style>
+<style>
+	#testactive{background:#333}
+	@media screen and (min-width: 400px) {
+		.face {
+			position: absolute;
+			animation: 0.5s myani 2;
+		}
+	}
+	@keyframes myani {
+		0 {
+			top: 70px;
+		}
+		20% {
+			top: 66px
+		}
+		30% {
+			top: 65px;
+		}
+		40%{
+			top: 63px;
+		}
+		100% {
+			top: 70px;
+		}
+	}
+</style>
 <!-- <div class="panel panel-primary pull-right">
   <div class="panel-heading">
     <h3 class="panel-title">推荐用户</h3>
@@ -10,5 +35,37 @@
       </div>
   <% }); %>
 </div> -->
+	<h3>hi~欢迎来到这里，我是ameng <span class="face">ヾ(๑╹◡╹)ﾉ"</span></h3>
+		<p class="text-primary">不管你来自哪里，很开心你能发现这里</p>
+		<hr />
+		<br />
+		<article>
+			<h4 class="text-info">这里是什么地方？</h4>
+			<ul>
+				<li>这里是一个node.js的demo</li>
+				<li>目前比较粗糙，说不定某天服务器就崩了_(:з」∠)_</li>
+				<li>有什么问题请联系我哦，企鹅号1508235075，发邮箱也ok的</li>
+			</ul>
+		</article>
+		<br />
+		<article>
+			<h4 class="text-info">在这里可以干什么？</h4>
+			<ul>
+				<li>写几篇文章，看不见别人的哦</li>
+				<li>传几张照片，可以自己翻着看看~</li>
+				<li>跟小伙伴聊天，不会保留聊天记录哦，希望你喜欢兔斯基 : )</li>
+			</ul>
+		</article>
+		<br />
+		<hr />
+		<article>
+			<h4 class="text-info">关于我</h4>
+			<ul>
+				<li>兴趣使然的<a href="https://github.com/amenging" target="_blank">github</a></li>
+				<li>其实没写什么的<a href="http://www.cnblogs.com/amenging/" target="_blank">博客</a></li>
+				<li>喜欢动漫，没电脑会死星人</li>
+				<li>如果你喜欢画画，欢迎来<a href="https://www.pixiv.net/member.php?id=7616780" target="_blank">p站</a>找我玩(≖ᴗ≖)✧</li>
+			</ul>
+		</article>
 <%- message %>
 <%- include templates/footer %>

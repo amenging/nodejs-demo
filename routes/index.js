@@ -199,11 +199,12 @@ router.post('/addarticle',function(req, res, next){
 })
 //album
 router.get('/album',function(req, res, next){
+	console.log('album')
 	checkLog(req,res);
 	paths = [];
-	dir = '../public/img/'+req.session.name;
-	if(!fs.existsSync('../public/img/' + req.session.name)){
-  	var s = fs.mkdirSync('../public/img/' + req.session.name);
+	dir = 'public/img/'+req.session.name;
+	if(!fs.existsSync('public/img/' + req.session.name)){
+  	var s = fs.mkdirSync('public/img/' + req.session.name);
   }
   fs.readdirSync(dir).forEach(function (file) {
     var pathname = path.join(dir, file);
@@ -223,10 +224,10 @@ router.post('/album',function(req, res, next){
 	checkLog(req,res);
 	var form = new formidable.IncomingForm();   //创建上传表单
     form.encoding = 'utf-8';		//设置编辑
-    if(!fs.existsSync('../public/img/' + req.session.name)){
-    	var s = fs.mkdirSync('../public/img/' + req.session.name);
+    if(!fs.existsSync('public/img/' + req.session.name)){
+    	var s = fs.mkdirSync('public/img/' + req.session.name);
     }
-    form.uploadDir = '../public/img/' + req.session.name + '/';	 //设置上传目录
+    form.uploadDir = 'public/img/' + req.session.name + '/';	 //设置上传目录
     console.log(form.uploadDir);
     form.keepExtensions = true;	 //保留后缀
     form.maxFieldsSize = 2 * 1024 * 1024;   //文件大小

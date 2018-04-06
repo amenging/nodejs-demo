@@ -1,7 +1,5 @@
 /node_modules/
-/public/img/amy/
-/public/img/tonny/
-/public/img/tom/
+/public/img/*/
 /gulp.bat
 /public/emoji/
 /public/fonts/
