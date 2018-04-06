@@ -1,8 +1,13 @@
 <%- include templates/header %>
-	<div class="alert alert-info hidden-xs">
-		仅支持手机，或者用谷歌控制台打开
+	<div class="alert alert-warning hidden-xs-1">
+		仅支持手机，或者用谷歌控制台模拟手机打开_(:з」∠)_
 	</div>
-	<canvas class="visible-xs" id="walking" style="border: 1px solid #ccc;" width="300%"></canvas>
+	<canvas class="visible-xs-1" id="walking" style="border: 1px solid #ccc;" width="300%"></canvas>
+	<br />
+	<article class="visible-xs-1">
+		游戏规则:
+			<p>通过点击来移动两个小球，小球的移动距离与点击时长成正比</p>
+	</article>
 	<script type="text/javascript">
 		function Ball(color) {
 			this.x = 5;
@@ -103,6 +108,22 @@
 	</script>
 	<script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="/js/bootstrap3.0.3.min.js"></script>
+	<script type="text/javascript">
+		$(function (){
+			var reg = /iPad|iPhone|Andriod/;
+			showOrHide();
+			function showOrHide() {
+				if (reg.test(window.navigator.userAgent) != true) {
+					$('.visible-xs-1').hide();
+					$('.hidden-xs-1').show();
+				} else {
+					$('.visible-xs-1').show();
+					$('.hidden-xs-1').hide();
+				}
+			}
+			$(window).resize(showOrHide);
+		});
+	</script>
 </div>
 </body>
 </html>
