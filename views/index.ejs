@@ -1,30 +1,5 @@
 <%- include templates/header %>
-<style>
-	#testactive{background:#333}
-	@media screen and (min-width: 400px) {
-		.face {
-			position: absolute;
-			animation: 0.5s myani 2;
-		}
-	}
-	@keyframes myani {
-		0 {
-			top: 70px;
-		}
-		20% {
-			top: 66px
-		}
-		30% {
-			top: 65px;
-		}
-		40%{
-			top: 63px;
-		}
-		100% {
-			top: 70px;
-		}
-	}
-</style>
+<style> #testactive{background:#333} </style>
 <!-- <div class="panel panel-primary pull-right">
   <div class="panel-heading">
     <h3 class="panel-title">推荐用户</h3>
@@ -39,7 +14,7 @@
 		<p class="text-primary">不管你来自哪里，很开心你能发现这里</p>
 		<hr />
 		<br />
-		<article>
+		<article class="lock where">
 			<h4 class="text-info">这里是什么地方？</h4>
 			<ul>
 				<li>这里是一个node.js的demo</li>
@@ -48,7 +23,7 @@
 			</ul>
 		</article>
 		<br />
-		<article>
+		<article class="lock what">
 			<h4 class="text-info">在这里可以干什么？</h4>
 			<ul>
 				<li>写几篇文章，看不见别人的哦</li>
@@ -57,8 +32,8 @@
 			</ul>
 		</article>
 		<br />
-		<hr />
-		<article>
+		<hr class="showDelay" />
+		<article class="lock aboutMe">
 			<h4 class="text-info">关于我</h4>
 			<ul>
 				<li>兴趣使然的<a href="https://github.com/amenging" target="_blank">github</a></li>
@@ -67,5 +42,7 @@
 				<li>如果你喜欢画画，欢迎来<a href="https://www.pixiv.net/member.php?id=7616780" target="_blank">p站</a>找我玩(≖ᴗ≖)✧</li>
 			</ul>
 		</article>
+
+		<!-- <div class="test">ww</div> -->
 <%- message %>
-<%- include templates/footer %>
+<%- include templates/footer%>
