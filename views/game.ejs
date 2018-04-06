@@ -110,7 +110,7 @@
 	<script type="text/javascript" src="/js/bootstrap3.0.3.min.js"></script>
 	<script type="text/javascript">
 		$(function (){
-			var reg = /iPad|iPhone|Andriod/;
+			var reg = /iPad|iPhone|Andriod/g;
 			showOrHide();
 			function showOrHide() {
 				if (reg.test(window.navigator.userAgent) != true) {
