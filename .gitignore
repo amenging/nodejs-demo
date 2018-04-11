@@ -5,4 +5,6 @@ package-lock.json
 /gulp.bat
 /public/emoji/
 /public/fonts/
+nw.js
+/bin/daemon
 
