@@ -54,15 +54,57 @@
   <script src="/js/live2d/Live2DFramework.js"></script>
   
   <!-- User's Script -->
-  <script src="/js/live2d/utils/MatrixStack.js"></script>
+  <!-- <script src="/js/live2d/utils/MatrixStack.js"></script>
   <script src="/js/live2d/utils/ModelSettingJson.js"></script>
   <script src="/js/live2d/PlatformManager.js"></script>
   <script src="/js/live2d/LAppDefine.js"></script>
   <script src="/js/live2d/LAppModel.js"></script>
   <script src="/js/live2d/LAppLive2DManager.js"></script>
-  <script src="/js/live2d/SampleApp1.js"></script>
+  <script src="/js/live2d/SampleApp1.js"></script> -->
+  <script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
-		window.onload = sampleApp1()
+		// window.onload = sampleApp1()
+		$.ajax({
+			url: 'http://localhost/web/a.php',
+			dataType: 'jsonp',
+			jsonp: 'callback',
+			data: {
+				name: 'wefre'
+			},
+			jsonpCallback:"success_jsonpCallback"
+
+		})
+		// .done(function(res) {
+		// 	console.log(res)
+		// 	console.log("success");
+		// })
+		// .fail(function() {
+		// 	console.log("error");
+		// })
+		// .always(function() {
+		// 	console.log("complete");
+		// });
+
+		function success_jsonpCallback(res) {
+			console.log(res)
+			console.log('aa')
+		}
+// 		$.ajax({
+//     type : "post",
+//     url : "http://localhost/web/a.php",
+//     dataType : "jsonp",
+//     jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
+//     // jsonpCallback:"success_jsonpCallback",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+//     success : function(json){
+//         console.log('success');
+//     },
+//     error:function(){
+//         console.log('fail');
+//     }
+// });
+		
 	</script>
+
+	<script type="text/javascript" src="http://localhost/web/a.php"></script>
 <%- message %>
 <%- include templates/footer%>
