@@ -332,23 +332,32 @@ $(function(){
 				"<div class='rt_icon'><i class='glyphicon glyphicon-chevron-right'></i></div>");
 			for(var i = 0;i < obj.length; i ++){ //为元素添加点击事件
 				$(obj[i]).attr('value',i);
-				$(obj[i]).on('click',function(){
-					$('.view').show();
-					$('.view_div').show();
-					$('.view_div img').attr({ //获取src
-						"src": $(this).attr('src'),
-						'value': $(this).attr('value')
-					});
-					$('.view_div').animate({ //渐变显示
-						'opacity':1
-					},1000);
-					$(".view_div").one().append(errorTip.format('方向键翻页'));
-					$('.view_div .alert').fadeOut(3000);
-					$("body").css({ //隐藏滚动条
-						"overflow":"hidden"
-					});
-					view();
-				});
+				var timeoutEvent
+				$(obj[i]).on('touchstart',function(){
+					timeoutEvent = setTimeout(() => {
+						console.log(1)
+					}, 1000)
+				})
+				$(obj[i]).on('touchend',function(){
+					clearTimeout(timeoutEvent)
+				})
+				// $(obj[i]).on('click',function(){
+				// 	$('.view').show();
+				// 	$('.view_div').show();
+				// 	$('.view_div img').attr({ //获取src
+				// 		"src": $(this).attr('src'),
+				// 		'value': $(this).attr('value')
+				// 	});
+				// 	$('.view_div').animate({ //渐变显示
+				// 		'opacity':1
+				// 	},1000);
+				// 	$(".view_div").one().append(errorTip.format('方向键翻页'));
+				// 	$('.view_div .alert').fadeOut(3000);
+				// 	$("body").css({ //隐藏滚动条
+				// 		"overflow":"hidden"
+				// 	});
+				// 	view();
+				// });
 			};
 			$('.rt_icon').click(function(){ //右切换
 				var index = $(this).siblings('img').attr('value');
