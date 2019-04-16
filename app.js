@@ -14,7 +14,9 @@ var db = mongoose.connect('mongodb://localhost/web'); //
 
 var app = express();
 
-app.use(session({ 
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
   secret: 'secret',
   cookie:{ 
     maxAge: 1000*60*30
