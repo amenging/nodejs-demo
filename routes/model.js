@@ -1,5 +1,13 @@
 var mongoose = require("mongoose");
-var vacationSchema = mongoose.Schema({
+var url = 'mongodb://web:web@localhost:27017/web?authSource=admin'
+
+mongoose.connect(url, {useNewUrlParser: true})
+
+mongoose.connection.on('error', (e) => {
+	console.log(e)
+})
+
+var vacationSchema = new mongoose.Schema({
 	name: String,
 	password:String,
 	title:String,
